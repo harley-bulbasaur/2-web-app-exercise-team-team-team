@@ -40,13 +40,7 @@ Teams must create a public channel in the course Discord server to use for team 
 Teams must write a product vision statement for their web application and place it in the `README.md` file. This should be one-sentence description of the project.
 
 ### User stories
-
-To begin, teams must develop a set of user stories that define the product they are building.
-
-- user stories should be written in the form "As a `[user type]`, I want `[some goal]` so that `[some reason]`."
-- user stories should be created as Issues in the team's GitHub repository.
-
-A link to the Issues page should be included in the `README.md` file.
+[Link to user stories](https://github.com/software-students-fall2023/2-web-app-exercise-team-team-team/issues)
 
 ### Incremental work
 

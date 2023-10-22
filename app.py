@@ -1,7 +1,8 @@
-import pymongo
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-from pymongo import MongoClient
+from flask import Flask, render_template, request,send_from_directory, redirect, url_for
+from db import get_tasks_collection
 from bson.objectid import ObjectId
+from datetime import datetime
+
 
 from db import get_tasks_collection
 
@@ -14,7 +15,17 @@ tasks_collection = get_tasks_collection()
 
 @app.route('/')
 def home():
-    tasks = tasks_collection.find()
+    # Default sorting criteria
+    sort_by = "due_date"
+    sort_order = 1
+    if 'sort-by' in request.args:
+        if request.args['sort-by'] == 'priority':
+            sort_by = 'priority'
+    if 'sort-order' in request.args and request.args['sort-order'] == 'desc':
+        sort_order = -1
+
+    tasks = tasks_collection.find().sort(sort_by, sort_order)
+
     return render_template('home.html', tasks=tasks)
 
 
@@ -25,13 +36,26 @@ def add_task():
         description = request.form['description']
         priority = request.form['priority']
         due_date = request.form['due_date']
+        pinned = True if request.form['pinned'] == 'true' else False
+        tags = request.form['tags'].split(",")
+        progress = request.form['progress']
 
-        tasks_collection.insert_one({
-            'title': title,
-            'description': description,
-            'priority': priority,
-            'due_date': due_date
-        })
+        # Convert due_date from string to datetime object
+        due_date_obj = datetime.strptime(due_date, '%Y-%m-%d')
+
+        try:
+            tasks_collection.insert_one({
+                'title': title,
+                'description': description,
+                'priority': int(priority),
+                'due_date': due_date_obj,
+                'pinned': pinned,
+                'tags': tags,
+                'progress': progress
+            })
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return "Error adding task.", 500
 
         return redirect(url_for('home'))
 
@@ -44,4 +68,4 @@ def custom_static(filename):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5002, debug=True)

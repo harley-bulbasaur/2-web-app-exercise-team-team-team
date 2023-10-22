@@ -1,50 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Overview</title>
+    <link rel="stylesheet" href="/public/css/main.css">
+</head>
+<body>
+
+<!-- Filter Form -->
 <form action="/" method="GET">
-    <label>Title: <input type="text" name="titleQ" /></label>
-    <label>Tag: <input type="text" name="tagQ" /></label>
-    <input type="submit" value="Filter" />
-  </form>
-  
-  <table>
+    <div class="form-group">
+        <label for="titleQ">Title:</label>
+        <input type="text" id="titleQ" name="titleQ" placeholder="Enter task title">
+    </div>
+    <div class="form-group">
+        <label for="tagQ">Tag:</label>
+        <input type="text" id="tagQ" name="tagQ" placeholder="Enter task tag">
+    </div>
+    <div>
+        <input type="submit" value="Filter">
+    </div>
+</form>
+
+<!-- Tasks Table -->
+<table>
     <thead>
-      <tr>
+    <tr>
         <th>Pinned</th>
         <th>Progress</th>
         <th>Title</th>
-  
         <th>
-          Due Date 
-        <a href="/?sort-by=due-date&sort-order=asc">⬆️</a>
-        <a href="/?sort-by=due-date&sort-order=desc">⬇️</a>
+            Due Date
+            <a href="/?sort-by=due-date&sort-order=asc">⬆️</a>
+            <a href="/?sort-by=due-date&sort-order=desc">⬇️</a>
         </th>
-  
         <th>
-          Priority 
-        <a href="/?sort-by=priority&sort-order=asc">⬆️</a>
-        <a href="/?sort-by=priority&sort-order=desc">⬇️</a>
+            Priority
+            <a href="/?sort-by=priority&sort-order=asc">⬆️</a>
+            <a href="/?sort-by=priority&sort-order=desc">⬇️</a>
         </th>
-        
         <th>Tags</th>
-      </tr>
+    </tr>
     </thead>
     <tbody>
-      {% for task in tasks %}
+    {% for task in tasks %}
         <tr>
-          <td>
-            {% if task.pinned %}
-              <img src="/public/img/pin.png" alt="Pinned" width="30" height="30" />
-            {% endif %}
-          </td>
-          <td>{{ task.progress }}</td>
-          <td>{{ task.title }}</td>
-          <td>{{ task.dueDate }}</td>
-          <td>{{ task.priority }}</td>
-          <td>
-            {% for tag in task.tags %}
-              <button>{{ tag }}</button>
-            {% endfor %}
-          </td>
+            <td>
+                {% if task.pinned %}
+                    <img src="/public/img/pin.png" alt="Pinned" width="30" height="30">
+                {% endif %}
+            </td>
+            <td>{{ task.progress }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>{{ task.priority }}</td>
+            <td>
+                {% for tag in task.tags %}
+                    <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </td>
         </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-  </table>
-  
+</table>
+
+<!-- Add Task Button -->
+<div class="add-task-btn-container">
+    <a href="/add" class="add-task-btn">Add New Task</a>
+</div>
+
+
+</body>
+</html>

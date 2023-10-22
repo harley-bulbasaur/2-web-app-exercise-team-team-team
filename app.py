@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from db import get_tasks_collection  
 
 app = Flask(__name__, static_folder='public')
 

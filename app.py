@@ -58,6 +58,33 @@ def add_task():
 
     return render_template('add_task.html')
 
+@app.route('/acc_register', methods=['GET', 'POST'])
+def acc_register():
+    if request.method == 'POST':
+
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        try:
+            result = insert_user(username, password, email)
+            
+            if result:
+                #registration success
+                return "Account registered successfully!"
+            else:
+                #error during registration
+                return "Error registering account.", 500
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return "Error inputing account information.", 500
+
+        
+        return redirect(url_for('home'))
+
+   
+    return render_template('acc_register.html')
+
 
 @app.route('/public/<path:filename>')
 def custom_static(filename):

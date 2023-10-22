@@ -1,6 +1,5 @@
-import pymongo
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-from pymongo import MongoClient
+from flask import Flask, render_template, request, redirect, url_for
+from db import get_tasks_collection
 from bson.objectid import ObjectId
 
 from db import get_tasks_collection
@@ -38,9 +37,9 @@ def add_task():
     return render_template('add_task.html')
 
 
-@app.route('/public/<path:filename>')
-def custom_static(filename):
-    return send_from_directory(app.static_folder, filename)
+# @app.route('/public/<path:filename>')
+# def custom_static(filename):
+#     return send_from_directory(app.static_folder, filename)
 
 
 if __name__ == '__main__':

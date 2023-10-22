@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://admin:secret@127.0.0.1:27017/')
+
+
 db = client['task_board']
 tasks_collection = db['tasks']
 

@@ -73,19 +73,40 @@ img {
     }
 }
 
-.add-task-btn-container {
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.add-task-btn {
-    display: inline-block;
+.add-task-btn, .delete-btn, .home-btn {
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
     text-decoration: none;
     border-radius: 5px;
+    color: white;
+}
+
+.add-task-btn {
+    background-color: #007BFF;
 }
 
 .add-task-btn:hover {
     background-color: #0056b3;
+}
+
+.home-btn {
+    background-color: #007BFF;
+}
+
+.home-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn {
+    background-color: red;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
 }

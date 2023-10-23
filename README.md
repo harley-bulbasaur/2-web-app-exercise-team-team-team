@@ -12,4 +12,4 @@ See instructions. Delete this line and place the Product Vision Statement here.
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
+[Link to task board](https://github.com/orgs/software-students-fall2023/projects/28/views/2)
